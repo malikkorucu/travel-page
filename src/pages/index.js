@@ -143,7 +143,7 @@ export default function Home() {
           </nav>
           <div className="cards">
             {[1, 2, 3, 4, 5, 6].map((el) => (
-              <Card />
+              <Card key={el} />
             ))}
           </div>
         </section>
