@@ -83,7 +83,12 @@ export default function Home() {
         {/* HEADER */}
         <nav>
           <span className="logo">
-            <Image src={require("../public/logo.png")} width={61} height={20} />
+            <Image
+              src={require("../public/logo.png")}
+              alt="logo"
+              width={61}
+              height={20}
+            />
           </span>
           {size.width > 480 && (
             <>
@@ -142,7 +147,6 @@ export default function Home() {
             ))}
           </div>
         </section>
- 
       </div>
     </Layout>
   );
