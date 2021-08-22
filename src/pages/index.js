@@ -6,6 +6,7 @@ import useWindowSize from "../utility/index";
 import DateBar from "../components/DateBar";
 import "react-datepicker/dist/react-datepicker.css";
 import Icon from "../assets/svg";
+import FastImage from "../components/common/FastImage";
 
 const navItems = [
   { title: "Home", to: "/" },
@@ -44,7 +45,7 @@ var startItems = [
 
 const Card = () => (
   <div className="card">
-    <Image src={require("../public/Singapore.png")} />
+    <Image src={require("../../public/Singapore.png")} />
     <div className="content p">
       <div className="title">Singapore</div>
       <p>
@@ -84,12 +85,13 @@ export default function Home() {
         <nav>
           <span className="logo">
             <Image
-              src={require("../public/logo.png")}
+              src={require("../../public/logo.png")}
               alt="logo"
               width={61}
               height={20}
             />
           </span>
+
           {size.width > 480 && (
             <>
               <ul>
@@ -145,6 +147,24 @@ export default function Home() {
             {[1, 2, 3, 4, 5, 6].map((el) => (
               <Card key={el} />
             ))}
+          </div>
+        </section>
+
+        <section className="blogs">
+          <h3>Blogs</h3>
+          <div className="row blog-container">
+            <div className="pr-2 w-50">
+              <FastImage width="100%" height="100%" image="/mountain.jpeg" />
+            </div>
+            <div className="column w-50">
+              <FastImage
+                className="mb-2"
+                width="100%"
+                height="100%"
+                image="/paris.jpeg"
+              />
+              <FastImage width="100%" height="100%" image="/singapore.jpeg" />
+            </div>
           </div>
         </section>
       </div>
