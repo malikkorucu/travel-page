@@ -152,11 +152,17 @@ export default function Home() {
 
         <section className="blogs">
           <h3>Blogs</h3>
-          <div className="row blog-container">
-            <div className="big">
-              <h3>The Ultimate Guide to Climbing Mount Kilimanjaro</h3>
-            </div>
 
+          <div>
+            <h3>The Ultimate Guide to Climbing Mount Kilimanjaro</h3>
+          </div>
+          <div className="row blog-container">
+            <FastImage
+              className="mr-2"
+              width="100%"
+              height="100%"
+              image="/paris.jpeg"
+            />
             <div className="column w-50">
               <FastImage
                 className="mb-2"
