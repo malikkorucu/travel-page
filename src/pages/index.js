@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Layout from "../components/common/Layout";
@@ -7,6 +7,7 @@ import DateBar from "../components/DateBar";
 import "react-datepicker/dist/react-datepicker.css";
 import Icon from "../assets/svg";
 import FastImage from "../components/common/FastImage";
+import Carousel from "../components/common/Carousel";
 
 const navItems = [
   { title: "Home", to: "/" },
@@ -45,7 +46,7 @@ var startItems = [
 
 const Card = () => (
   <div className="card">
-    <Image src={require("../../public/Singapore.png")} />
+    <Image src={require("../../public/Singapore.png")} alt="banner" />
     <div className="content p">
       <div className="title">Singapore</div>
       <p>
@@ -70,10 +71,28 @@ const Card = () => (
   </div>
 );
 
+const destinationsNavItems = [
+  { id: 1, title: "The Weekend Break" },
+  { id: 2, title: "The Package Holiday" },
+  { id: 3, title: "The Group Tour" },
+  { id: 4, title: "Long Term Slow Travel" },
+];
+
 export default function Home() {
   const size = useWindowSize();
+  const [activeIndex, setActiveIndex] = useState(1);
 
-  useEffect(() => {}, []);
+  const setting = {
+    dragSpeed: 1.25,
+    itemWidth: size.width < 400 ? size.width - 50 : size.width * 0.4,
+    itemSideOffsets: 15,
+  };
+
+  const itemStyle = {
+    ...setting,
+    width: `${setting.itemWidth}px`,
+    margin: `0px ${setting.itemSideOffsets}px`,
+  };
 
   return (
     <Layout>
@@ -131,16 +150,26 @@ export default function Home() {
             </div>
           ))}
         </section>
+      </div>
 
-        {/* RECOMENDED DESTINATIONS */}
-        <section className="destinations">
+      {/* RECOMENDED DESTINATIONS */}
+      <section className="destinations">
+        <div className="dots left">
+          <Icon name="Dots" width={100} height={100} />
+        </div>
+        <div className="container">
           <h3>Recommended destination</h3>
           <nav>
             <ul>
-              <li className="active">The Weekend Break</li>
-              <li>The Package Holiday</li>
-              <li>The Group Tour</li>
-              <li>Long Term Slow Travel</li>
+              {destinationsNavItems.map((el) => (
+                <li
+                  onClick={() => setActiveIndex(el.id)}
+                  key={el.id}
+                  className={el.id === activeIndex ? "active" : ""}
+                >
+                  {el.title}
+                </li>
+              ))}
             </ul>
           </nav>
           <div className="cards">
@@ -148,32 +177,118 @@ export default function Home() {
               <Card key={el} />
             ))}
           </div>
-        </section>
+        </div>
+        <div className="dots right">
+          <Icon name="Dots" width={100} height={100} />
+        </div>
+      </section>
 
+      <div className="container">
         <section className="blogs">
-          <h3>Blogs</h3>
+          <h2 className="t-center">Blogs</h2>
 
-          <div>
-            <h3>The Ultimate Guide to Climbing Mount Kilimanjaro</h3>
-          </div>
           <div className="row blog-container">
-            <FastImage
-              className="mr-2"
-              width="100%"
-              height="100%"
-              image="/paris.jpeg"
-            />
-            <div className="column w-50">
+            <div className="w-70 mr-2">
               <FastImage
-                className="mb-2"
                 width="100%"
                 height="100%"
-                image="/paris.jpeg"
-              />
-              <FastImage width="100%" height="100%" image="/singapore.jpeg" />
+                className="center"
+                image="/mountain.jpeg"
+              >
+                <div className="w-30">
+                  <h1 className="t-center f-30">
+                    The Ultimate Guide to Climbing Mount Kilimanjaro
+                  </h1>
+                </div>
+              </FastImage>
+            </div>
+            <div className="column w-30">
+              <FastImage
+                className="mb-2 center"
+                width="100%"
+                height="100%"
+                image="/traveler.jpeg"
+              >
+                <div className="w-70">
+                  <h1 className="t-center f-25">
+                    12 Things I’d Tell Any New Traveler
+                  </h1>
+                </div>
+              </FastImage>
+              <FastImage
+                width="100%"
+                className="center"
+                height="100%"
+                image="/singapore.jpeg"
+              >
+                <div className="w-70">
+                  <h1 className="t-center f-25">
+                    The Ultimate Packing List for Female Travelers{" "}
+                  </h1>
+                </div>
+              </FastImage>
             </div>
           </div>
         </section>
+        <section className="commends">
+          <h2 className="t-center">Happy Customers</h2>
+
+          <Carousel setting={setting} dataLength={10}>
+            {[...Array(10)].map((el, index) => (
+              <div
+                className="commend-card"
+                key={index}
+                style={{ ...itemStyle }}
+              >
+                <Icon
+                  className="pr-3 pt-2"
+                  name="Quote"
+                  width={150}
+                  height={150}
+                />
+
+                <div className="content">
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ultricies mi eget mauris pharetra. Amet risus nullam
+                    eget felis eget nunc lobortis. Purus in massa tempor nec.
+                    Porta nibh venenatis cras sed. Viverra ipsum nunc aliquet
+                    bibendum enim. Risus pretium quam
+                  </p>
+                  <div className="user row pt-3">
+                    <FastImage
+                      className="circle"
+                      width={50}
+                      height={50}
+                      image="/singapore.jpeg"
+                    />
+                    <div className="column j-center pl-1">
+                      <div className="name">Malik KORUCU</div>
+                      <div className="desc">Project Manger flyhigh</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </Carousel>
+        </section>
+
+        <footer className="row j-between a-center p-3">
+          <div>Copyright © 2020 Malik KORUCU. All rights reserved</div>
+          <ul className="d-flex row">
+            {navItems.map((el, i) => (
+              <li className="pr-2" key={i}>
+                <a href={el.to}>{el.title}</a>
+              </li>
+            ))}
+          </ul>
+          <div className="social-icons">
+            <Icon  name="Facebook" width={30} height={30}/>
+            <Icon className="mx-2" name="Instagram" width={30} height={30}/>
+            <Icon name="Linkedin" width={30} height={30}/>
+          </div>
+        </footer>
       </div>
     </Layout>
   );

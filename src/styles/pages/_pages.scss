@@ -3,6 +3,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+   height:50px;
   ul {
     display: flex;
     list-style-type: none;
@@ -164,12 +165,27 @@ nav {
 
 //DESTINATION CARDS
 .destinations {
-  h3 {
+  background-color: $soft-white;
+  padding-top:30px;
+  position: relative;
+  .dots{
+    position: absolute;
+  }
+  .dots.left{
+    top:100px
+  }
+  .dots.right{
+    bottom:150px;
+    right:0;
+    z-index:0
+  }
+   h3 {
     text-align: center;
   }
   nav {
     @extend %row-center;
     overflow-x: scroll;
+    padding-bottom: 10px;
     scrollbar-color: red;
     &::-webkit-scrollbar {
       display: none;
@@ -199,7 +215,6 @@ nav {
     }
   }
   .cards {
-    padding: 30px 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -209,10 +224,12 @@ nav {
       flex-direction: column;
     }
     .card {
+      z-index: 5;
+
       @include for-phone {
         width: 100%;
       }
-      margin-bottom: 100px;
+      margin-bottom: 30px;
       .title {
         font-size: 20px;
         margin: 10px 0;
@@ -250,6 +267,7 @@ nav {
 .blog-container {
   display: flex;
   width: 100%;
+   min-height: 500px;
   @include for-phone {
     flex-direction: column;
     & > div {
@@ -257,11 +275,49 @@ nav {
       padding: 7px 0;
     }
   }
+  .img {
+    border-radius: 10px;
+    @include blur(0.5);
+    width: 50%;
+    height: 100%;
+    @include for-phone {
+      height: 300px !important;
+      & > h1 {
+        font-size: 20px !important;
+      }
+    }
+  }
+  
 }
 
-.img {
-  border-radius: 10px;
-  @include blur(0.5);
-  width: 50%;
-  height: 100%;
+//COMMENDS
+.commends {
+  margin: 90px 0;
+  .commend-card {
+    background-color: white;
+    box-shadow: 13px 13px 20px 1px rgba(235, 233, 233, 0.4);
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    border: 1px solid rgb(236, 236, 236);
+    p {
+      line-height: 28px;
+    }
+  }
+}
+
+
+footer{
+  min-height:120px;
+  width:100%;
+  border-radius:15px;
+  background-color: $light-blue;
+  margin-bottom: 50px;
+ 
+  @include for-phone{
+    flex-direction: column !important;
+    & ul{
+      margin:20px 0;
+    }
+   }
 }
