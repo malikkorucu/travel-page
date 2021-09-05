@@ -11,7 +11,7 @@ const Carousel = ({ children, ...props }) => {
 
   const cWrapperStyle = {
     width: `${
-      dataLength * (setting.itemWidth + 2 * setting.itemSideOffsets)
+      dataLength * ((setting.itemWidth + 2) * setting.itemSideOffsets)
     }px`,
     height: `${setting.itemHeight}px`,
   };
@@ -42,10 +42,12 @@ const Carousel = ({ children, ...props }) => {
   `;
   };
 
-  const handleMouseLeave = () => {};
+  const handleMouseLeave = () => {
+    handleSnap();
+  };
 
   const handleMouseUp = () => {
-    setIsClicked(false);
+    handleSnap();
   };
 
   const handleMouseMove = (e) => {
@@ -59,13 +61,40 @@ const Carousel = ({ children, ...props }) => {
     carousel.firstChild.style.transform = `translateX(${offsetLeft + walk}px)`;
   };
 
+  const handleSnap = () => {
+    const { _data, itemWidth, itemSideOffsets } = setting;
+    const carousel = cRef.current;
+
+    setIsClicked(false);
+    carousel.classList.remove("active");
+
+    const tempThresholdOffset = convertInteger(
+      carousel.firstChild.style.transform
+    );
+
+    const end =
+      dataLength * (itemWidth + 2 * itemSideOffsets) -
+      30 -
+      carousel.offsetWidth;
+
+    if (Math.abs(tempThresholdOffset) > end || tempThresholdOffset > 0) {
+      setIsClicked(false);
+      carousel.firstChild.style.cssText = `
+        transform: translateX(${tempThresholdOffset > 0 ? 0 : -end}px);
+        transition: transform 0.5s cubic-bezier(.25,.72,.51,.96);
+      `;
+      return false;
+    }
+    return true;
+  };
+
   const next = (e) => {
     const carousel = cRef.current;
 
     carousel.firstChild.style.cssText = `
-    transform: translateX(${offsetLeft - setting.itemWidth}px);
-    transition: transform 0.5s ease-in-out;
-  `;
+      transform: translateX(${offsetLeft - setting.itemWidth}px);
+      transition: transform 0.5s ease-in-out;
+    `;
 
     setOffsetLeft(offsetLeft - setting.itemWidth);
   };
@@ -77,7 +106,6 @@ const Carousel = ({ children, ...props }) => {
     transform: translateX(${offsetLeft + setting.itemWidth}px);
     transition: transform 0.5s ease-in-out;
   `;
-
     setOffsetLeft(offsetLeft + setting.itemWidth);
   };
 

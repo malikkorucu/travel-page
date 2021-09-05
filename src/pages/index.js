@@ -8,6 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Icon from "../assets/svg";
 import FastImage from "../components/common/FastImage";
 import Carousel from "../components/common/Carousel";
+import GhostCarousel from '../components/common/GhostCarouesl';
 
 const navItems = [
   { title: "Home", to: "/" },
@@ -274,6 +275,8 @@ export default function Home() {
           </Carousel>
         </section>
 
+        {/* <GhostCarousel/> */}
+
         <footer className="row j-between a-center p-3">
           <div>Copyright © 2020 Malik KORUCU. All rights reserved</div>
           <ul className="d-flex row">
@@ -284,9 +287,9 @@ export default function Home() {
             ))}
           </ul>
           <div className="social-icons">
-            <Icon  name="Facebook" width={30} height={30}/>
-            <Icon className="mx-2" name="Instagram" width={30} height={30}/>
-            <Icon name="Linkedin" width={30} height={30}/>
+            <Icon name="Facebook" width={30} height={30} />
+            <Icon className="mx-2" name="Instagram" width={30} height={30} />
+            <Icon name="Linkedin" width={30} height={30} />
           </div>
         </footer>
       </div>
