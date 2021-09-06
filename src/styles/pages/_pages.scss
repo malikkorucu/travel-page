@@ -280,6 +280,13 @@ nav {
     @include blur(0.5);
     width: 50%;
     height: 100%;
+    &:hover{
+      cursor:pointer;
+      img{
+        transform:scale(1.2);
+        transition: transform .5s ease;
+      }
+    }
     @include for-phone {
       height: 300px !important;
       & > h1 {

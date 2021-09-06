@@ -193,7 +193,7 @@ export default function Home() {
               <FastImage
                 width="100%"
                 height="100%"
-                className="center"
+                className="s-image center"
                 image="/mountain.jpeg"
               >
                 <div className="w-30">
@@ -205,7 +205,7 @@ export default function Home() {
             </div>
             <div className="column w-30">
               <FastImage
-                className="mb-2 center"
+                className="s-image mb-2 center"
                 width="100%"
                 height="100%"
                 image="/traveler.jpeg"
