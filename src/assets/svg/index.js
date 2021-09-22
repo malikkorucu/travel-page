@@ -13,6 +13,7 @@ import Dots from './dots.svg';
 import Facebook from './facebook.svg';
 import Linkedin from './linkedin.svg';
 import Instagram from './instagram.svg';
+import Hamburger from './hamburger.svg';
 
 const icons = {
   Fly,
@@ -27,7 +28,8 @@ const icons = {
   Dots,
   Facebook,
   Linkedin,
-  Instagram
+  Instagram,
+  Hamburger
 };
 
 const Icon = ({ name, width, height, className }) => {
